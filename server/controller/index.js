@@ -1,4 +1,4 @@
-const {User, Product} = require('../models')
+const {User, Product, Category} = require('../models')
 const {comparePassword} = require("../helpers/bcrypt")
 const {signToken} = require("../helpers/jwt")
 const {Op} = require("sequelize")
@@ -120,6 +120,16 @@ class Controller {
             }
             const deleted = await Product.destroy({where: {id: productId}})
             res.status(200).json({message: "Product Deleted Success"})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json("Internal Server Error")
+        }
+    }
+    static async showCategory(req,res) {
+        try {
+            let category = await Category.findAll()
+            res.status(200).json(category)
+
         } catch (error) {
             console.log(error);
             res.status(500).json("Internal Server Error")
