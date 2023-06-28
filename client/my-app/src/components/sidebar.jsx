@@ -14,10 +14,10 @@ export default function Sidebar () {
     }
     return ( 
         <>
-       <div className="area"></div><nav className="main-menu">
+       <div className="area"><nav className="main-menu">
             <ul>
                 <li>
-                <Link to="/table"> 
+                <Link to="/home"> 
                         <i className="fa fa-home fa-2x"></i>
                         <span className="nav-text">
                            Home Dashboard
@@ -26,24 +26,49 @@ export default function Sidebar () {
                   
                 </li>
                 <li className="has-subnav">
-                   <Link to="/table"> 
-                        <i className="fa fa-globe fa-2x"></i>
+                   <Link to="/tableProduct"> 
+                        <i className="fa fa-table fa-2x"></i>
                         <span className="nav-text">
-                            Table Data 
+                            Products
                         </span>
                     </Link>
                     
                 </li>
                 <li className="has-subnav">
-                <Link to="/home">
-                       <i className="fa fa-comments fa-2x"></i>
+                <Link to="/tableCategory">
+                       <i className="fa fa-table fa-2x"></i>
                         <span className="nav-text">
-                            Group Hub Forums
+                        Categories
                         </span>
                 </Link>
                     
                 </li>
-                
+                <li className="has-subnav">
+                <Link to="/barChart">
+                       <i className="fa fa-globe fa-2x"></i>
+                        <span className="nav-text">
+                           Bar Chart
+                        </span>
+                </Link>
+                    
+                </li>
+                <li className="has-subnav">
+                <Link to="/lineChart">
+                       <i className="fa fa-globe fa-2x"></i>
+                        <span className="nav-text">
+                           Line Chart
+                        </span>
+                </Link>
+                    
+                </li>
+                <li className="has-subnav">
+                <Link to="/pieChart">
+                       <i className="fa fa-globe fa-2x"></i>
+                        <span className="nav-text">
+                           Pie Chart
+                        </span>
+                </Link>        
+                </li>      
             </ul>
 
             <ul className="logout">
@@ -57,6 +82,7 @@ export default function Sidebar () {
                 </li>  
             </ul>
         </nav>
+        </div>
         </>
     )
 }

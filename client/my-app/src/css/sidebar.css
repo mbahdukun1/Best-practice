@@ -20,7 +20,7 @@ overflow:visible;
 }
 
 .main-menu {
-background:#212121;
+background:#000000;
 border-right:1px solid #e5e5e5;
 position:absolute;
 top:0;
@@ -28,14 +28,15 @@ bottom:0;
 height:100%;
 left:0;
 width:60px;
-overflow:hidden;
+display: flex;
+overflow:auto;
 transition:width .05s linear;
 transition:width .05s linear;
 transform:translateZ(0) scale(1,1);
 z-index:1000;
 }
 
-.main-menu>ul {
+.main-menu ul {
 margin:7px 0;
 }
 
@@ -45,13 +46,13 @@ display:block;
 width:250px;
 }
 
-.main-menu li>a {
+.main-menu li a {
 position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
 color:#999;
- font-family: arial;
+font-family: arial;
 font-size: 14px;
 text-decoration:none;
 transform:translateZ(0) scale(1,1);
@@ -78,7 +79,7 @@ width:190px;
   font-family: 'Titillium Web', sans-serif;
 }
 
-.main-menu>ul.logout {
+.main-menu ul.logout {
 position:absolute;
 left:0;
 bottom:0;
@@ -115,7 +116,7 @@ color:#fff;
 background-color:#000000;
 }
 .area {
-float: left;
+float: right;
 background: #e2e2e2;
 width: 100%;
 height: 100%;

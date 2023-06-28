@@ -2,20 +2,22 @@ import { useDispatch, useSelector } from "react-redux"
 import ProductTable from "../components/tables"
 import "../css/table.css"
 import { useEffect } from "react"
-import { fetchProducts } from "../store/actions/actionProduct"
+import { fetchCategories } from "../store/actions/actionCategory"
+import CategoryTable from "../components/categoryTable"
 
-export default function TablePage () {
-  let items = useSelector((state) => {
-    return state.productsReducer.products})
-  let dispatch = useDispatch()
-// console.log(items);
+export default function TableCategory () {
+    let categories = useSelector((state) => {
+       return state.categoriesReducer.categories
+    })
 
-  useEffect(() => {
-    dispatch(fetchProducts())
-  },[])
+    let dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchCategories())
+    }, [])
     return (
         <>
-        <section className="intro">
+<section className="intro">
   <div className="bg-image h-100" >
     <div className="mask d-flex align-items-center h-100">
       <div className="container">
@@ -28,17 +30,13 @@ export default function TablePage () {
                     <thead >
                       <tr>
                         <th scope="col">NO</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col" width="180px">Image</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Categories</th>
+                        <th scope="col">Category Name</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {items.map((item,index) => (
-                      <ProductTable key={item.id} data={item} id={index + 1}/>
-                    ))}
+                     {categories.map((category,index) => (
+                        <CategoryTable key={category.id} data={category} id={index+1} />
+                     ))}
                     </tbody>
                   </table>
                 </div>

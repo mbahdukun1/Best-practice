@@ -12,6 +12,6 @@ export default function productsReducer(state = initialState, action) {
                 products: action.payload
             };
             default: 
-            return false
+            return state
     }
 }

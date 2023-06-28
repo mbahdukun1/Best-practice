@@ -59,8 +59,11 @@ class Controller {
         }
     }
     static async showProduct(req,res) {
+        let options = {
+            include: [Category]
+        }
         try {
-            let product = await Product.findAll()
+            let product = await Product.findAll(options)
             res.status(200).json(product)
 
         } catch (error) {

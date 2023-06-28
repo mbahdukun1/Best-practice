@@ -1,12 +1,15 @@
 import BarChart from "../components/barChart";
-import Sidebar from "../components/sidebar";
-// import DashboardPage from "./dashboardPage";
+import LineChart from "../components/lineChart";
+import PieChart from "../components/pieChart";
 
 export default function StartingPage() {
     return (
         <>
-        <Sidebar/>
-        <BarChart/>
+        <div style={{width:"100vw",height:"100vh"}}>
+       <BarChart/>
+       <PieChart/>
+       <LineChart/>
+       </div>
         </>
     )
 }

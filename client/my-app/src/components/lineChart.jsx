@@ -1,7 +1,8 @@
 import React, {useEffect, useRef} from "react"
 import Chart from "chart.js/auto"
 
-export default function BarChart ()  {
+
+export default function LineChart ()  {
     const chartRef = useRef(null)
 
     useEffect(() => {
@@ -15,7 +16,7 @@ export default function BarChart ()  {
             { year: 2016, count: 28 },
           ];
           const chartOptions = {
-            type: "bar",
+            type: "line",
             data: {
                 labels: data.map((row) => row.year),
                 datasets: [
@@ -34,11 +35,7 @@ export default function BarChart ()  {
     },[])
 
    
-    return (
-        <div>
-        <canvas ref = {chartRef} id="acquisitions"/>
-         </div>
-    )
+    return <canvas ref = {chartRef} id="acquisitions"/>
     
 
 };
