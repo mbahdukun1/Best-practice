@@ -1,27 +1,28 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function BarChart() {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const data = [
-      { year: 2010, count: 10 },
-      { year: 2011, count: 20 },
-      { year: 2012, count: 15 },
-      { year: 2013, count: 25 },
-      { year: 2014, count: 22 },
-      { year: 2015, count: 30 },
-      { year: 2016, count: 28 },
+      { stock: 53, merk: "audi" },
+      { stock: 134, merk: "toyota" },
+      { stock: 22, merk: "bmw" },
+      { stock: 152, merk: "audi" },
+      { stock: 234, merk: "nissan" },
+      { stock: 345, merk: "bmw" },
+      { stock: 133, merk: "toyota" },
     ];
     const chartOptions = {
       type: "bar",
       data: {
-        labels: data.map((row) => row.year),
+        labels: data.map((row) => row.merk),
         datasets: [
           {
             label: "Acquisitions by year",
-            data: data.map((row) => row.count),
+            data: data.map((row) => row.stock),
           },
         ],
       },
