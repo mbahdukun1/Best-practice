@@ -7,7 +7,7 @@ import TablePage from "../pages/tablePage";
 import PieChart from "../components/pieChart";
 import BarChart from "../components/barChart";
 import LineChart from "../components/lineChart";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/navbar";
 import Layout from "../components/layout";
 import TableCategory from "../pages/tableCategories";
 
@@ -20,43 +20,42 @@ import TableCategory from "../pages/tableCategories";
 // }
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <LoginPage/>
-    },
-    {
-        path: "/register",
-        element: <RegisterPage/>
-    },
-    {
-        element: <Layout/>,
-        children: [
-            {
-                path: "/home",
-                element: <StartingPage/>
-            },
-            {
-                path: "/tableProduct",
-                element: <TablePage/>
-            },
-            {
-                path: "/tableCategory",
-                element: <TableCategory/>
-            },
-            {
-                path: "/barChart",
-                element: <BarChart/>
-            },
-            {
-                path: "/pieChart",
-                element: <PieChart/>
-            },
-            {
-                path: "/lineChart",
-                element: <LineChart/>
-            }
-        ]
-    }
-   
-])
-export default router
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/home",
+        element: <StartingPage />,
+      },
+      {
+        path: "/tableProduct",
+        element: <TablePage />,
+      },
+      {
+        path: "/tableCategory",
+        element: <TableCategory />,
+      },
+      {
+        path: "/barChart",
+        element: <BarChart />,
+      },
+      {
+        path: "/pieChart",
+        element: <PieChart />,
+      },
+      {
+        path: "/lineChart",
+        element: <LineChart />,
+      },
+    ],
+  },
+]);
+export default router;

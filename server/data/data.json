@@ -1,79 +1,88 @@
 {
-    "Users" :[
-        {
-        "email":"test@gmail.com",
-        "password":"12345"
-        },
-        {
-        "email":"testing@gmail.com",
-        "password":"12345"
-        }
-    ], "Products": [
-        {
-            "name": "GTR", 
-            "description" : "Super Car from japan ",
-            "imageUrl" : "https://cdn.motor1.com/images/mgl/8LAjo/s1/2020-nissan-gt-r-nismo.jpg",
-            "stock": 15,
-            "categoryId": 4
-        },
-        {
-            "name": "FT 86", 
-            "description" : "Sports Car From Toyota",
-            "imageUrl" : "https://th.bing.com/th/id/R.f2bd38de034207b302c5f7c0d57cb227?rik=p6kJ7u29XJ3cLQ&riu=http%3a%2f%2fwww.ausmotive.com%2fimages2011%2fToyota-FT-86-II-08.jpg&ehk=tHqNBQfoYO%2fvFCXEd5Dtvih9Qo7wbttyf8CKUoUMPdQ%3d&risl=&pid=ImgRaw&r=0",
-            "stock": 40,
-            "categoryId": 3
-        },
-        {
-            "name": "Audi R8", 
-            "description" : "Sports car with 8 Silinders",
-            "imageUrl" : "https://th.bing.com/th/id/OIP.1kSmpVPtshronUkMxHDR7AHaEK?pid=ImgDet&rs=1",
-            "stock": 10 ,
-            "categoryId": 1
-        },  
-        {
-            "name": "BMW M4", 
-            "description" : "Sports car from Germany",
-            "imageUrl" : "https://www.hdwallpaper.nu/wp-content/uploads/2017/02/bmw_m4-1.jpg",
-            "stock": 45 ,
-            "categoryId": 2
-        },
-        {
-            "name": "Fortuner", 
-            "description" : "Family Car 4x4 AWD",
-            "imageUrl" : "https://th.bing.com/th/id/OIP.e7SFaEHE8ZHjx4B0HPKeAwHaEo?pid=ImgDet&rs=1",
-            "stock": 80 ,
-            "categoryId": 3
-        },
-        {
-            "name": "Nissan Skyline R34", 
-            "description" : "Legendary Car from NISSAN",
-            "imageUrl" : "https://th.bing.com/th/id/R.cb3012ad42da99e92164df6baed3adca?rik=UQytmOco6Z%2b%2bAA&riu=http%3a%2f%2fwallpapers-all.com%2fuploads%2fposts%2f2016-12%2f1_nissan_skyline.jpg&ehk=REEzpRQhoZ3QltOgsGzj3RHImkmZcs%2b99QbAbuKkqJc%3d&risl=&pid=ImgRaw&r=0",
-            "stock": 4 ,
-            "categoryId": 4
-        },
-        {
-            "name": "BMW x7", 
-            "description" : "Sports car from Germany",
-            "imageUrl" : "https://cdn.motor1.com/images/mgl/lA08g/s1/bmw-x7.jpg",
-            "stock": 8 ,
-            "categoryId": 2
-        }
-    ], "Categories" :[
-        {
-            "id":1,
-            "name":"Audi"
-        },
-        {
-            "id":2,
-            "name":"BMW"
-        },
-        {
-            "id":3,
-            "name":"TOYOTA"
-        },
-        {
-            "id":4,
-            "name":"Nissan"
-        }
-    ]
+  "Users": [
+    {
+      "email": "test@gmail.com",
+      "password": "12345"
+    },
+    {
+      "email": "testing@gmail.com",
+      "password": "12345"
+    }
+  ],
+  "Products": [
+    {
+      "name": "GTR",
+      "description": "Super Car from japan ",
+      "imageUrl": "https://cdn.motor1.com/images/mgl/8LAjo/s1/2020-nissan-gt-r-nismo.jpg",
+      "stock": 15,
+      "categoryId": 4,
+      "authorId": 1
+    },
+    {
+      "name": "FT 86",
+      "description": "Sports Car From Toyota",
+      "imageUrl": "https://th.bing.com/th/id/R.f2bd38de034207b302c5f7c0d57cb227?rik=p6kJ7u29XJ3cLQ&riu=http%3a%2f%2fwww.ausmotive.com%2fimages2011%2fToyota-FT-86-II-08.jpg&ehk=tHqNBQfoYO%2fvFCXEd5Dtvih9Qo7wbttyf8CKUoUMPdQ%3d&risl=&pid=ImgRaw&r=0",
+      "stock": 40,
+      "categoryId": 3,
+      "authorId": 2
+    },
+    {
+      "name": "Audi R8",
+      "description": "Sports car with 8 Silinders",
+      "imageUrl": "https://th.bing.com/th/id/OIP.1kSmpVPtshronUkMxHDR7AHaEK?pid=ImgDet&rs=1",
+      "stock": 10,
+      "categoryId": 1,
+      "authorId": 1
+    },
+    {
+      "name": "BMW M4",
+      "description": "Sports car from Germany",
+      "imageUrl": "https://www.hdwallpaper.nu/wp-content/uploads/2017/02/bmw_m4-1.jpg",
+      "stock": 45,
+      "categoryId": 2,
+      "authorId": 2
+    },
+    {
+      "name": "Fortuner",
+      "description": "Family Car 4x4 AWD",
+      "imageUrl": "https://th.bing.com/th/id/OIP.e7SFaEHE8ZHjx4B0HPKeAwHaEo?pid=ImgDet&rs=1",
+      "stock": 80,
+      "categoryId": 3,
+      "authorId": 2
+    },
+    {
+      "name": "Nissan Skyline R34",
+      "description": "Legendary Car from NISSAN",
+      "imageUrl": "https://th.bing.com/th/id/R.cb3012ad42da99e92164df6baed3adca?rik=UQytmOco6Z%2b%2bAA&riu=http%3a%2f%2fwallpapers-all.com%2fuploads%2fposts%2f2016-12%2f1_nissan_skyline.jpg&ehk=REEzpRQhoZ3QltOgsGzj3RHImkmZcs%2b99QbAbuKkqJc%3d&risl=&pid=ImgRaw&r=0",
+      "stock": 4,
+      "categoryId": 4,
+      "authorId": 1
+    },
+    {
+      "name": "BMW x7",
+      "description": "Sports car from Germany",
+      "imageUrl": "https://cdn.motor1.com/images/mgl/lA08g/s1/bmw-x7.jpg",
+      "stock": 8,
+      "categoryId": 2,
+      "authorId": 2
+    }
+  ],
+  "Categories": [
+    {
+      "id": 1,
+      "name": "Audi"
+    },
+    {
+      "id": 2,
+      "name": "BMW"
+    },
+    {
+      "id": 3,
+      "name": "TOYOTA"
+    },
+    {
+      "id": 4,
+      "name": "Nissan"
+    }
+  ]
 }
