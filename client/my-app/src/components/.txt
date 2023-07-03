@@ -1,51 +1,43 @@
- {/* <div className="area">
-        <nav className="main-menu">
-          <ul>
-            <li>
-              <Link to="/home">
-                <i className="fa fa-home fa-2x"></i>
-                <span className="nav-text">Home Dashboard</span>
-              </Link>
-            </li>
-            <li className="has-subnav">
-              <Link to="/tableProduct">
-                <i className="fa fa-table fa-2x"></i>
-                <span className="nav-text">Products</span>
-              </Link>
-            </li>
-            <li className="has-subnav">
-              <Link to="/tableCategory">
-                <i className="fa fa-table fa-2x"></i>
-                <span className="nav-text">Categories</span>
-              </Link>
-            </li>
-            <li className="has-subnav">
-              <Link to="/barChart">
-                <i className="fa fa-globe fa-2x"></i>
-                <span className="nav-text">Bar Chart</span>
-              </Link>
-            </li>
-            <li className="has-subnav">
-              <Link to="/lineChart">
-                <i className="fa fa-globe fa-2x"></i>
-                <span className="nav-text">Line Chart</span>
-              </Link>
-            </li>
-            <li className="has-subnav">
-              <Link to="/pieChart">
-                <i className="fa fa-globe fa-2x"></i>
-                <span className="nav-text">Pie Chart</span>
-              </Link>
-            </li>
-          </ul>
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/actions/actionProduct";
 
-          <ul className="logout">
-            <li>
-              <button onClick={handleLogout}>
-                <i className="fa fa-power-off fa-2x"></i>
-                <span className="nav-text">Logout</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div> */}
+export default function BarChart() {
+  const chartRef = useRef(null);
+  const products = useSelector((state) => state.productsReducer.products);
+  console.log(products, "<<< ini products");
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (products.length > 0 && chartRef.current) {
+      const chartOptions = {
+        type: "pie",
+        data: {
+          labels: products.map((row) => row.name),
+          datasets: [
+            {
+              label: "Acquisitions by Stock",
+              data: products.map((row) => row.stock),
+            },
+          ],
+        },
+      };
+
+      const chart = new Chart(chartRef.current, chartOptions);
+      return () => {
+        chart.destroy();
+      };
+    }
+  }, [products]);
+
+  return (
+    <div>
+      <canvas ref={chartRef} id="acquisitions" />
+    </div>
+  );
+}

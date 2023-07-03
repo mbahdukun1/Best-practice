@@ -1,44 +1,43 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/actions/actionProduct";
 import "../css/pieChart.css";
 
-export default function PieChart() {
+export default function BarChart() {
   const chartRef = useRef(null);
+  const products = useSelector((state) => state.productsReducer.products);
+  console.log(products, "<<< ini products");
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
-    const data = [
-      { year: 2010, count: 10 },
-      { year: 2011, count: 20 },
-      { year: 2012, count: 15 },
-      { year: 2013, count: 25 },
-      { year: 2014, count: 22 },
-      { year: 2015, count: 30 },
-      { year: 2016, count: 28 },
-    ];
-    const chartOptions = {
-      type: "pie",
-      responsive: true,
-      maintainAspectRatio: false,
+    if (products.length > 0 && chartRef.current) {
+      const chartOptions = {
+        type: "pie",
+        data: {
+          labels: products.map((row) => row.name),
+          datasets: [
+            {
+              label: "Acquisitions by Stock",
+              data: products.map((row) => row.stock),
+            },
+          ],
+        },
+      };
 
-      data: {
-        labels: data.map((row) => row.year),
-        datasets: [
-          {
-            label: "Acquisitions by year",
-            data: data.map((row) => row.count),
-          },
-        ],
-      },
-    };
-
-    const chart = new Chart(chartRef.current, chartOptions);
-    return () => {
-      chart.destroy();
-    };
-  }, []);
+      const chart = new Chart(chartRef.current, chartOptions);
+      return () => {
+        chart.destroy();
+      };
+    }
+  }, [products]);
 
   return (
-    <div className="flex" style={{ width: "300px" }}>
+    <div className="chart-pie" style={{ width: "500px" }}>
       <canvas ref={chartRef} id="acquisitions" />
     </div>
   );

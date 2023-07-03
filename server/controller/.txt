@@ -1,0 +1,35 @@
+// const { search, filter } = req.query;
+    // let options = {
+    //   include: [
+    //     {
+    //       model: Category,
+    //       attributes: ["name"],
+    //     },
+    //     {
+    //       model: User,
+    //       attributes: ["email"],
+    //     },
+    //   ],
+    // };
+    // if (search) {
+    //   options.where = {
+    //     name: {
+    //       [Op.iLike]: `%${search}%`,
+    //     },
+    //   };
+    // }
+    // try {
+    //   let product = await Product.findAll(options);
+
+    //   if (filter) {
+    //     const filteredProducts = product.filter((el) => {
+    //       return el.Category.name === filter;
+    //     });
+    //     // console.log(filter, "<<< ini filter data");
+    //     res.status(200).json({ products: filteredProducts });
+    //   } else {
+    //     res.status(200).json({ products: product });
+    //   }
+    // } catch (error) {
+    //   next(error);
+    // }

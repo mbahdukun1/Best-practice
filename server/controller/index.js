@@ -50,50 +50,72 @@ class Controller {
     }
   }
   static async showProduct(req, res, next) {
-    // let options = {
-    //   include: [Category],
-    // };
-    try {
-      let product = await Product.findAll({
-        include: [
-          {
-            model: Category,
-            attributes: ["name"],
-          },
-          {
-            model: User,
-            attributes: ["email"],
-          },
-        ],
-      });
-      res.status(200).json(product);
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async findProductByCategory(req, res, next) {
-    try {
-      const { filter } = req.query;
+    const { search, filter } = req.query;
+    let options = {
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {},
+        },
+        {
+          model: User,
+          attributes: ["email"],
+        },
+      ],
+    };
 
-      let categories;
-      if (filter) {
-        categories = await Category.findAll({
-          include: {
-            model: Product,
-          },
-          where: {
-            name: {
-              [Op.iLike]: `%${filter}%`,
-            },
-          },
-        });
-      }
-      res.status(200).json({ categories });
+    if (search) {
+      options.where = {
+        name: {
+          [Op.iLike]: `%${search}%`,
+        },
+      };
+    }
+
+    if (filter) {
+      options.include[0].where.name = {
+        [Op.iLike]: `%${filter}%`,
+      };
+    }
+
+    try {
+      let products = await Product.findAll(options);
+
+      res.status(200).json({ products });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
+  // static async findProductByCategory(req, res, next) {
+  //   const { search, filter } = req.query;
+  //   let options = {
+  //     include: {
+  //       model: Product,
+  //       where: {},
+  //     },
+  //   };
+  //   if (search) {
+  //     options.where = {
+  //       name: {
+  //         [Op.iLike]: `%${search}%`,
+  //       },
+  //     };
+  //   }
+  //   try {
+  //     let categories = await Category.findAll(options);
+  //     if (filter) {
+  //       const filteredProducts = categories.filter((el) => {
+  //         return el.Category.name === filter;
+  //       });
+  //       res.status(200).json({ filteredProducts });
+  //     } else {
+  //       res.status(200).json({ categories });
+  //     }
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
   static async addProduct(req, res, next) {
     let { name, description, imageUrl, stock, categoryId } = req.body;
     try {

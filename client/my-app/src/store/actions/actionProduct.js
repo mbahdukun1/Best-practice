@@ -7,19 +7,16 @@ export const fetchProductSuccess = (payload) => {
   };
 };
 
-export const fetchProducts = (input) => {
-  let url;
-  if (input) {
-    const { search, filter } = input;
-    if (input.filter && !input.search) {
-      url = baseUrl + `/product?filter=${filter}`;
-    } else if (input.search && !input) {
-      url = baseUrl + `/product?search=${search}`;
-    } else {
-      url = baseUrl + `/product?search=${search}&filter=${filter}`;
-    }
+export const fetchProducts = (query) => {
+  let url = baseUrl + "/product";
+  if (query && query.search && query.filter) {
+    url += `?search=${query.search}&filter=${query.filter}`;
+  } else if (query && query.search) {
+    url += `?search=${query.search}`;
+  } else if (query && query.filter) {
+    url += `?filter=${query.filter}`;
   } else {
-    url = baseUrl + "/product";
+    url;
   }
 
   return (dispatch) => {
@@ -30,25 +27,34 @@ export const fetchProducts = (input) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, "<<<< ini data");
-        dispatch(fetchProductSuccess(data));
+        console.log(data.products, " <<< ini data");
+        dispatch(fetchProductSuccess(data.products));
       })
       .catch((error) => console.log(error));
   };
-  //   return async (dispacth, getState) => {
-  //     try {
-  //       const response = await fetch(baseUrl + "/product", {
-  //         headers: {
-  //           access_token: localStorage.access_token,
-  //         },
-  //       });
-  //       if (!response.ok) {
-  //         console.log(response.text());
-  //       }
-  //       const data = await response.json();
-  //       dispacth(fetchProductSuccess(data));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
 };
+
+// export const fetchFindProducts = () => {
+//   let url = baseUrl + "/products";
+
+//   if (query && query.search && query.filter) {
+//     url += `?search=${query.search}&filter=${query.filter}`;
+//   } else if (query && query.search) {
+//     url += `?search=${query.search}`;
+//   } else if (query && query.filter) {
+//     url += `?filter=${query.filter}`;
+//   }
+
+//   return (dispatch) => {
+//     return fetch(url, {
+//       headers: {
+//         access_token: localStorage.access_token,
+//       },
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         dispatch(fetchProductSuccess(data));
+//       })
+//       .catch((error) => console.log(error));
+//   };
+// };
