@@ -20,8 +20,15 @@ export default function Sidebar() {
   function handleLogout(e) {
     e.preventDefault();
     localStorage.clear();
-    toast.success("Success Login ", {
-      position: toast.POSITION.TOP_CENTER,
+    toast.success("Logout Successfully ", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
     });
     navigate("/");
   }

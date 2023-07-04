@@ -33,11 +33,11 @@ class Controller {
       }
       const findUser = await User.findOne({ where: { email } });
       if (!findUser) {
-        throw { name: "Invalid Email/password" };
+        throw { name: "Invalid Email" };
       }
       const isValidPassword = comparePassword(password, findUser.password);
       if (!isValidPassword) {
-        throw { name: "Invalid Email/password" };
+        throw { name: "Invalid password" };
       }
       const payload = {
         id: findUser.id,
@@ -117,7 +117,7 @@ class Controller {
   //   }
   // }
   static async addProduct(req, res, next) {
-    let { name, description, imageUrl, stock, categoryId } = req.body;
+    let { name, description, imageUrl, stock, categoryId, authorId } = req.body;
     try {
       let newProduct = await Product.create({
         name,
@@ -125,6 +125,7 @@ class Controller {
         imageUrl,
         stock,
         categoryId,
+        authorId,
       });
       res.status(201).json({ product: { newProduct } });
     } catch (error) {
@@ -134,20 +135,21 @@ class Controller {
   }
   static async editProduct(req, res, next) {
     const productId = req.params.id;
-    const { name, description, imageUrl } = req.body;
+    const { name, description, imageUrl, stock, categoryId, authorId } = req.body;
     try {
       const findProduct = await Product.findByPk(productId);
       if (!findProduct) {
         throw {
-          name: "productNotFound",
-          code: 400,
-          message: "Product Not Found",
+          name: "DataNotFound",
         };
       }
       findProduct.update({
         name,
         description,
         imageUrl,
+        stock,
+        categoryId,
+        authorId,
       });
       res.status(200).json({
         product: findProduct,
@@ -164,9 +166,7 @@ class Controller {
       const findProduct = await Product.findByPk(productId);
       if (!findProduct) {
         throw {
-          name: "productNotFound",
-          code: 400,
-          message: "Product Not Found",
+          name: "DataNotFound",
         };
       }
       const deleted = await Product.destroy({ where: { id: productId } });

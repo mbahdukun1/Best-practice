@@ -13,9 +13,13 @@ const errorHandler = (error, req, res, next) => {
       status = 400;
       message = "Entitas Is required";
       break;
-    case "Invalid Email/password":
+    case "Invalid Email":
       status = 401;
-      message = "Email / Password Invalid";
+      message = "Email Invalid";
+      break;
+    case "Invalid password":
+      status = 401;
+      message = "Password Invalid";
       break;
     case "requiredEmail":
       status = 400;

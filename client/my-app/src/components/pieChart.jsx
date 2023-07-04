@@ -37,7 +37,7 @@ export default function BarChart() {
   }, [products]);
 
   return (
-    <div className="chart-pie" style={{ width: "500px" }}>
+    <div className="chart-pie">
       <canvas ref={chartRef} id="acquisitions" />
     </div>
   );

@@ -22,39 +22,37 @@ export const fetchProducts = (query) => {
   return (dispatch) => {
     return fetch(url, {
       headers: {
+        "Content-Type": "application/json",
         access_token: localStorage.access_token,
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.products, " <<< ini data");
+        // console.log(data.products, " <<< ini data");
         dispatch(fetchProductSuccess(data.products));
       })
       .catch((error) => console.log(error));
   };
 };
 
-// export const fetchFindProducts = () => {
-//   let url = baseUrl + "/products";
-
-//   if (query && query.search && query.filter) {
-//     url += `?search=${query.search}&filter=${query.filter}`;
-//   } else if (query && query.search) {
-//     url += `?search=${query.search}`;
-//   } else if (query && query.filter) {
-//     url += `?filter=${query.filter}`;
-//   }
-
-//   return (dispatch) => {
-//     return fetch(url, {
-//       headers: {
-//         access_token: localStorage.access_token,
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         dispatch(fetchProductSuccess(data));
-//       })
-//       .catch((error) => console.log(error));
-//   };
-// };
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${baseUrl}/product/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.access_token,
+        },
+      });
+      const res = await response.json();
+      console.log(res);
+      if (!response.ok) {
+        throw { message: "Failed To delete" };
+      }
+      dispatch(fetchProducts());
+    } catch (error) {
+      throw error;
+    }
+  };
+};
