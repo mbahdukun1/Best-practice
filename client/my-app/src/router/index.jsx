@@ -11,6 +11,7 @@ import Sidebar from "../components/navbar";
 import Layout from "../components/layout";
 import TableCategory from "../pages/tableCategories";
 import AddProduct from "../pages/addProduct";
+import EditProduct from "../pages/editProduct";
 
 // function protectRoute() {
 //     if (localStorage.access_token) {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/addProduct",
         element: <AddProduct />,
+      },
+      {
+        path: "/editProduct",
+        element: <EditProduct />,
       },
     ],
   },

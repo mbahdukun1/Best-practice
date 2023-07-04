@@ -54,9 +54,11 @@ export default function ProductTable({ data, id }) {
               <PlusLg />
             </button>
           </Link>
-          <button>
-            <PencilFill />
-          </button>
+          <Link to="/editProduct">
+            <button>
+              <PencilFill />
+            </button>
+          </Link>
           <button onClick={() => deleteHandler(data.id)}>
             <Trash />
           </button>

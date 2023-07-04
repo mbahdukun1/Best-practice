@@ -35,6 +35,27 @@ export const fetchProducts = (query) => {
   };
 };
 
+export const addProduct = (input) => {
+  return (dispatch) => {
+    return fetch(baseUrl + "/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(input),
+    }).then((response) => {
+      if (response.ok) {
+        response.json();
+      } else {
+        return response.text().then((text) => {
+          throw new Error(text);
+        });
+      }
+    });
+  };
+};
+
 export const deleteProduct = (id) => {
   return async (dispatch) => {
     try {
