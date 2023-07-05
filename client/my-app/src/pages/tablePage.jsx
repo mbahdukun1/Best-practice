@@ -3,6 +3,8 @@ import ProductTable from "../components/tables";
 import "../css/table.css";
 import { useEffect } from "react";
 import { fetchProducts } from "../store/actions/actionProduct";
+import { PlusCircle, PlusLg } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 export default function TablePage() {
   let items = useSelector((state) => {
@@ -37,6 +39,13 @@ export default function TablePage() {
                               <th scope="col">Stock</th>
                               <th scope="col">Categories</th>
                               <th scope="col">Author</th>
+                              <th>
+                                <Link to={"/addProduct"}>
+                                  <button>
+                                    <PlusCircle /> DATA
+                                  </button>
+                                </Link>
+                              </th>
                             </tr>
                           </thead>
                           <tbody>

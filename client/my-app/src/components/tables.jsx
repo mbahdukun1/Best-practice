@@ -49,12 +49,7 @@ export default function ProductTable({ data, id }) {
         <td>{data.Category.name}</td>
         <td>{data.User.email}</td>
         <td>
-          <Link to="/addProduct">
-            <button>
-              <PlusLg />
-            </button>
-          </Link>
-          <Link to="/editProduct">
+          <Link to={`/addProduct/${data.id}`}>
             <button>
               <PencilFill />
             </button>

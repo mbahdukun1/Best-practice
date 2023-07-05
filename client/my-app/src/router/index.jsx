@@ -1,16 +1,15 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import LoginPage from "../pages/loginPage";
 import RegisterPage from "../pages/registerPage";
-// import DashboardPage from "../pages/dashboardPage";
 import StartingPage from "../pages/startingPage";
 import TablePage from "../pages/tablePage";
 import PieChart from "../components/pieChart";
 import BarChart from "../components/barChart";
 import LineChart from "../components/lineChart";
-import Sidebar from "../components/navbar";
 import Layout from "../components/layout";
 import TableCategory from "../pages/tableCategories";
 import AddProduct from "../pages/addProduct";
+import AddCategory from "../pages/addCategory";
 import EditProduct from "../pages/editProduct";
 
 // function protectRoute() {
@@ -62,8 +61,16 @@ const router = createBrowserRouter([
         element: <AddProduct />,
       },
       {
-        path: "/editProduct",
+        path: "/addProduct/:id",
         element: <EditProduct />,
+      },
+      {
+        path: "/addCategory",
+        element: <AddCategory />,
+      },
+      {
+        path: "/addCategory/:id",
+        element: <AddCategory />,
       },
     ],
   },

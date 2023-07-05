@@ -22,6 +22,7 @@ class Controller {
       next(error);
     }
   }
+
   static async loginUser(req, res, next) {
     const { email, password } = req.body;
     try {
@@ -49,6 +50,7 @@ class Controller {
       next(error);
     }
   }
+
   static async showProduct(req, res, next) {
     const { search, filter } = req.query;
     let options = {
@@ -118,6 +120,7 @@ class Controller {
   // }
   static async addProduct(req, res, next) {
     let { name, description, imageUrl, stock, categoryId, authorId } = req.body;
+    const userId = req.user.id;
     try {
       let newProduct = await Product.create({
         name,
@@ -125,7 +128,7 @@ class Controller {
         imageUrl,
         stock,
         categoryId,
-        authorId,
+        authorId: userId,
       });
       res.status(201).json({ product: { newProduct } });
     } catch (error) {
@@ -133,6 +136,7 @@ class Controller {
       next(error);
     }
   }
+
   static async editProduct(req, res, next) {
     const productId = req.params.id;
     const { name, description, imageUrl, stock, categoryId, authorId } = req.body;
@@ -160,6 +164,7 @@ class Controller {
       next(error);
     }
   }
+
   static async deleteProduct(req, res, next) {
     const productId = req.params.id;
     try {
@@ -179,6 +184,45 @@ class Controller {
     try {
       let category = await Category.findAll();
       res.status(200).json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async addCategory(req, res, next) {
+    let { name } = req.body;
+    try {
+      let newCategory = await Category.create({ name });
+      res.status(201).json({
+        category: newCategory,
+        message: "Add Category Successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async editCategory(req, res, next) {
+    const { id } = req.params;
+    const { name } = req.body;
+    try {
+      await Category.update({ name }, { where: { id } });
+      res.status(201).json({ message: "Category has been updated" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteCategory(req, res, next) {
+    const { id } = req.params;
+    try {
+      const category = await Category.findByPk(id);
+      if (!category) {
+        throw { name: "DataNotFound" };
+      }
+
+      await Category.destroy({ where: { id } });
+      res.status(200).json({ message: `${category.name} has been deleted` });
     } catch (error) {
       next(error);
     }

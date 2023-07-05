@@ -56,6 +56,29 @@ export const addProduct = (input) => {
   };
 };
 
+export const editProduct = (input, id) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(`${baseUrl}/product/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.access_token,
+        },
+        body: JSON.stringify(input),
+      });
+      const res = await response.json();
+      if (!response.ok) {
+        throw { message: res.message };
+      }
+      console.log(res);
+      return "Success Edit Product";
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
 export const deleteProduct = (id) => {
   return async (dispatch) => {
     try {

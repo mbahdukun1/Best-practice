@@ -1,18 +1,60 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchCategories } from "../store/actions/actionCategory";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Form, Link, useNavigate, useParams } from "react-router-dom";
+import { addProduct, editProduct, fetchProducts } from "../store/actions/actionProduct";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AddProduct() {
-  let data = useSelector((state) => {
+  const [addForm, setAddForm] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => {
     return state.categoriesReducer.categories;
   });
-  let dispatch = useDispatch();
-  //   console.log(data, "<<<< ini data page");
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+
+  const changeHandler = (e) => {
+    const { value, name } = e.target;
+    const obj = { ...addForm };
+    obj[name] = value;
+    setAddForm(obj);
+    console.log(addForm);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(addForm))
+      .then(() => {
+        toast.success(`Success Added Item`, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate("/tableProduct");
+      })
+      .catch((error) => {
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
   return (
     <>
       <section className="vh-100" style={{ backgroundColor: "#fff" }}>
@@ -21,14 +63,14 @@ export default function AddProduct() {
             <div className="col-xl-9">
               <h1 className="text-black-center mb-4">FORM ADD PRODUCT</h1>
 
-              <div className="card" style={{ borderRadius: "15px", backgroundColor: "whitesmoke" }}>
+              <form onSubmit={handleSubmit} className="card" style={{ borderRadius: "15px", backgroundColor: "whitesmoke" }}>
                 <div className="card-body">
                   <div className="row align-items-center pt-4 pb-3">
                     <div className="col-md-3 ps-5">
                       <h6 className="mb-0">Name Product</h6>
                     </div>
                     <div className="col-md-9 pe-5">
-                      <input type="text" placeholder="name" className="form-control form-control-lg" />
+                      <input onChange={changeHandler} id="name" type="text" placeholder="name" name="name" className="form-control form-control-lg" />
                     </div>
                   </div>
 
@@ -38,16 +80,18 @@ export default function AddProduct() {
                         <h6 className="mb-0">Description Product</h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <textarea className="form-control" rows="3" placeholder="Description"></textarea>
+                        <textarea onChange={changeHandler} name="description" id="description" className="form-control" rows="3" placeholder="Description"></textarea>
                       </div>
                     </div>
 
                     <div className="row align-items-center py-3">
                       <div className="col-md-3 ps-5">
-                        <h6 className="mb-0">Image Url</h6>
+                        <h6 htmlFor="imageUrl" className="mb-0">
+                          Image Url
+                        </h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <input type="text" className="form-control form-control-lg" placeholder="Image Url" />
+                        <input onChange={changeHandler} name="imageUrl" id="imageUrl" type="text" className="form-control form-control-lg" placeholder="Image Url" />
                       </div>
                     </div>
 
@@ -56,13 +100,16 @@ export default function AddProduct() {
                         <h6 className="mb-0">Stock</h6>
                       </div>
                       <div className="col-md-2 pe-5">
-                        <input type="number" className="form-control form-control-lg" placeholder="0" />
+                        <input type="number" onChange={changeHandler} name="stock" id="stock" className="form-control form-control-lg" placeholder="0" />
                       </div>
                       <div className="col-md-3 ps-5">
                         <h6 className="mb-0">Category Product</h6>
                       </div>
                       <div className="col-md-2 pe-5">
-                        <select type="select">
+                        <select name="categoryId" id="categoryId" onChange={changeHandler}>
+                          <option hidden selected>
+                            --Select One--
+                          </option>
                           {data.map((item) => (
                             <option value={item.id}>{item.name}</option>
                           ))}
@@ -82,11 +129,12 @@ export default function AddProduct() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </section>
+      <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
     </>
   );
 }
