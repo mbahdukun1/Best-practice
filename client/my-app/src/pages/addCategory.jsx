@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCategories } from "../store/actions/actionCategory";
 import { useEffect } from "react";
+import "../css/table.css";
 
 export default function AddCategory() {
   let dataCategory = useSelector((state) => {
@@ -28,6 +29,17 @@ export default function AddCategory() {
                   </div>
                   <div className="col-md-9 pe-5">
                     <input type="text" placeholder="name" className="form-control form-control-lg" />
+                  </div>
+                </div>
+
+                <div className="row align-items-center py-3">
+                  <div className="col-md-3 ps-5">
+                    <h6 htmlFor="imageUrl" className="mb-0">
+                      Main Image
+                    </h6>
+                  </div>
+                  <div className="col-md-9 pe-5">
+                    <input name="mainImg" id="mainImg" type="text" className="form-control form-control-lg" placeholder="Image Url" />
                   </div>
                 </div>
 

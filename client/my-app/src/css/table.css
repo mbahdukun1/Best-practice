@@ -16,11 +16,11 @@ thead th {
 }
 
 .card {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .table-scroll {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .table-scroll table thead th {

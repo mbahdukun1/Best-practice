@@ -41,11 +41,9 @@ export default function CategoryTable({ data, id }) {
         <td>{id}</td>
         <td>{data.name}</td>
         <td>
-          {/* <Link to={`/addCategory`}>
-            <button>
-              <PlusLg />
-            </button>
-          </Link> */}
+          <img className="img-fluid" src={data.mainImg} />
+        </td>
+        <td>
           <Link to={`/addCategory/${data.id}`}>
             <button>
               <PencilFill />

@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import ProductTable from "../components/tables";
 import "../css/table.css";
 import { useEffect } from "react";
 import { fetchCategories } from "../store/actions/actionCategory";
@@ -33,6 +32,9 @@ export default function TableCategory() {
                             <tr>
                               <th scope="col">NO</th>
                               <th scope="col">Category Name</th>
+                              <th scope="col" width="180px">
+                                Image Category
+                              </th>
                               <th>
                                 <Link to={"/addCategory"}>
                                   <button>

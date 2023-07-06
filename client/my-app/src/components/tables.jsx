@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function ProductTable({ data, id }) {
+export default function ProductTable({ product, id }) {
   const dispatch = useDispatch();
   function deleteHandler() {
-    dispatch(deleteProduct(data.id))
+    dispatch(deleteProduct(product.id))
       .then(() => {
         toast.success("Product Deleted Successfully", {
           position: "top-right",
@@ -40,21 +40,21 @@ export default function ProductTable({ data, id }) {
     <>
       <tr>
         <td>{id}</td>
-        <td>{data.name}</td>
-        <td>{data.description}</td>
+        <td>{product.name}</td>
+        <td>{product.description}</td>
         <td>
-          <img className="img-fluid" src={data.imageUrl} />
+          <img className="img-fluid" src={product.imageUrl} />
         </td>
-        <td>{data.stock}</td>
-        <td>{data.Category.name}</td>
-        <td>{data.User.email}</td>
+        <td>{product.stock}</td>
+        <td>{product.Category.name}</td>
+        <td>{product.User.email}</td>
         <td>
-          <Link to={`/addProduct/${data.id}`}>
+          <Link to={`/addProduct/${product.id}`}>
             <button>
               <PencilFill />
             </button>
           </Link>
-          <button onClick={() => deleteHandler(data.id)}>
+          <button onClick={() => deleteHandler(product.id)}>
             <Trash />
           </button>
         </td>

@@ -89,6 +89,19 @@ class Controller {
       next(error);
     }
   }
+
+  static async findProductId(req, res, next) {
+    const productId = req.params.id;
+    try {
+      const findProduct = await Product.findByPk(productId, {
+        include: [Category, User],
+      });
+      if (!findProduct) throw { name: "DataNotFound" };
+      res.status(200).json({ product: findProduct });
+    } catch (error) {
+      next(error);
+    }
+  }
   // static async findProductByCategory(req, res, next) {
   //   const { search, filter } = req.query;
   //   let options = {
@@ -130,6 +143,7 @@ class Controller {
         categoryId,
         authorId: userId,
       });
+
       res.status(201).json({ product: { newProduct } });
     } catch (error) {
       console.log(error);
@@ -189,10 +203,21 @@ class Controller {
     }
   }
 
-  static async addCategory(req, res, next) {
-    let { name } = req.body;
+  static async findCategoryId(req, res, next) {
+    const categoryId = req.params.id;
     try {
-      let newCategory = await Category.create({ name });
+      const findCategory = await Category.findByPk(categoryId);
+      if (!findCategory) throw { name: "DataNotFound" };
+      res.status(200).json({ category: findCategory });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async addCategory(req, res, next) {
+    let { name, mainImg } = req.body;
+    try {
+      let newCategory = await Category.create({ name, mainImg });
       res.status(201).json({
         category: newCategory,
         message: "Add Category Successfully",
@@ -204,9 +229,9 @@ class Controller {
 
   static async editCategory(req, res, next) {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, mainImg } = req.body;
     try {
-      await Category.update({ name }, { where: { id } });
+      await Category.update({ name, mainImg }, { where: { id } });
       res.status(201).json({ message: "Category has been updated" });
     } catch (error) {
       next(error);

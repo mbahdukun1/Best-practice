@@ -1,4 +1,4 @@
-import { baseUrl, PRODUCTS } from "./actionType";
+import { baseUrl, PRODUCTS, PRODUCTS_DETAIL } from "./actionType";
 
 export const fetchProductSuccess = (payload) => {
   return {
@@ -98,5 +98,29 @@ export const deleteProduct = (id) => {
     } catch (error) {
       throw error;
     }
+  };
+};
+
+const fetchJobDetailSuccess = (payload) => {
+  return {
+    type: PRODUCTS_DETAIL,
+    payload,
+  };
+};
+
+export const fetchJobDetail = (id) => {
+  return (dispatch) => {
+    fetch(baseUrl + `/product/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(fetchJobDetailSuccess(data.product));
+        // console.log(data, "<<< ini data dari action");
+      })
+      .catch((error) => console.log(error));
   };
 };

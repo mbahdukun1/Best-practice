@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchCategories } from "../store/actions/actionCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Link, useNavigate, useParams } from "react-router-dom";
-import { addProduct, editProduct, fetchProducts } from "../store/actions/actionProduct";
+import { editProduct, fetchJobDetail } from "../store/actions/actionProduct";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function EditProduct() {
-  const [editForm, setEditForm] = useState([]);
+  const [editForm, setEditForm] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -15,14 +15,10 @@ export default function EditProduct() {
     return state.categoriesReducer.categories;
   });
   const dataProduct = useSelector((state) => {
-    return state.productsReducer.products;
+    // console.log(state.productsReducer.productDetail.product, "<<<< inio data product");
+    return state.productsReducer.productDetail;
   });
-  console.log(dataProduct.stock, "<<< ini data name");
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-    dispatch(fetchProducts());
-  }, []);
+  // console.log(dataProduct, "<<< ini data name");
 
   const changeHandler = (e) => {
     const { value, name } = e.target;
@@ -34,7 +30,7 @@ export default function EditProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editProduct(editForm))
+    dispatch(editProduct(editForm, id))
       .then(() => {
         toast.success(`Product Edit Successfully`, {
           position: "top-right",
@@ -61,6 +57,11 @@ export default function EditProduct() {
         });
       });
   };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchJobDetail(id));
+  }, []);
   return (
     <>
       <section className="vh-100" style={{ backgroundColor: "#fff" }}>
@@ -76,7 +77,7 @@ export default function EditProduct() {
                       <h6 className="mb-0">Name Product</h6>
                     </div>
                     <div className="col-md-9 pe-5">
-                      <input onChange={changeHandler} defaultValue={dataProduct.name} type="text" placeholder="name" name="name" className="form-control form-control-lg" />
+                      <input onChange={changeHandler} name="name" defaultValue={dataProduct.name} className="form-control form-control-lg" />
                     </div>
                   </div>
 
@@ -86,7 +87,7 @@ export default function EditProduct() {
                         <h6 className="mb-0">Description Product</h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <textarea onChange={changeHandler} name="description" id="description" className="form-control" rows="3" placeholder="Description"></textarea>
+                        <textarea onChange={changeHandler} defaultValue={dataProduct.description} name="description" id="description" className="form-control" rows="3" placeholder="Description"></textarea>
                       </div>
                     </div>
 
@@ -97,7 +98,7 @@ export default function EditProduct() {
                         </h6>
                       </div>
                       <div className="col-md-9 pe-5">
-                        <input onChange={changeHandler} name="imageUrl" id="imageUrl" type="text" className="form-control form-control-lg" placeholder="Image Url" />
+                        <input onChange={changeHandler} defaultValue={dataProduct.imageUrl} name="imageUrl" id="imageUrl" type="text" className="form-control form-control-lg" placeholder="Image Url" />
                       </div>
                     </div>
 
@@ -106,7 +107,7 @@ export default function EditProduct() {
                         <h6 className="mb-0">Stock</h6>
                       </div>
                       <div className="col-md-2 pe-5">
-                        <input type="number" onChange={changeHandler} name="stock" id="stock" className="form-control form-control-lg" placeholder="0" />
+                        <input type="number" onChange={changeHandler} defaultValue={dataProduct.stock} name="stock" id="stock" className="form-control form-control-lg" placeholder="0" />
                       </div>
                       <div className="col-md-3 ps-5">
                         <h6 className="mb-0">Category Product</h6>

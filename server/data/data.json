@@ -70,19 +70,23 @@
   "Categories": [
     {
       "id": 1,
-      "name": "Audi"
+      "name": "Audi",
+      "mainImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_HxumG6qxDxKx1hguttgentDnzjH81690_Q&usqp=CAU"
     },
     {
       "id": 2,
-      "name": "BMW"
+      "name": "BMW",
+      "mainImg": "https://seeklogo.com/images/B/bmw-logo-248C3D90E6-seeklogo.com.png"
     },
     {
       "id": 3,
-      "name": "TOYOTA"
+      "name": "TOYOTA",
+      "mainImg": "https://logowik.com/content/uploads/images/toyota5075.logowik.com.webp"
     },
     {
       "id": 4,
-      "name": "Nissan"
+      "name": "Nissan",
+      "mainImg": "https://logowik.com/content/uploads/images/607_nissan_logo.jpg"
     }
   ]
 }

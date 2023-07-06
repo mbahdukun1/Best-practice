@@ -1,17 +1,27 @@
-import { PRODUCTS } from "../actions/actionType";
+import { PRODUCTS, PRODUCTS_DETAIL } from "../actions/actionType";
 
 const initialState = {
-    products: []
-}
+  products: [],
+  productDetail: {},
+};
 
 export default function productsReducer(state = initialState, action) {
-    switch(action.type) {
-        case PRODUCTS:
-            return{
-                ...state,
-                products: action.payload
-            };
-            default: 
-            return state
-    }
+  const { type, payload } = action;
+  let newState = {};
+  switch (type) {
+    case PRODUCTS:
+      newState = {
+        ...state,
+        products: payload,
+      };
+      return newState;
+    case PRODUCTS_DETAIL:
+      newState = {
+        ...state,
+        productDetail: payload,
+      };
+      return newState;
+    default:
+      return state;
+  }
 }

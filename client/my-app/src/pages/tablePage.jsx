@@ -50,7 +50,7 @@ export default function TablePage() {
                           </thead>
                           <tbody>
                             {items.map((item, index) => (
-                              <ProductTable key={item.id} data={item} id={index + 1} />
+                              <ProductTable key={item.id} product={item} id={index + 1} />
                             ))}
                           </tbody>
                         </table>
