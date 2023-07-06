@@ -1,37 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { addCategory, fetchCategories } from "../store/actions/actionCategory";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editCategory, fetchCategoryDetail } from "../store/actions/actionCategory";
+import { Form, Link, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "../css/table.css";
 
-export default function AddCategory() {
-  const [addForm, setAddForm] = useState([]);
+export default function EditCategory() {
+  const [editForm, setEditForm] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const dataCategory = useSelector((state) => {
-    return state.categoriesReducer.categories;
+  const data = useSelector((state) => {
+    return state.categoriesReducer.categoriesDetail;
   });
-
-  // console.log(dataCategory, "<<<< ini data page");
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
+  console.log(data, "<<<< ini data page");
 
   const changeHandler = (e) => {
     const { value, name } = e.target;
-    const obj = { ...addForm };
+    const obj = { ...editForm };
     obj[name] = value;
-    setAddForm(obj);
-    console.log(addForm);
+    setEditForm(obj);
+    console.log(editForm);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addCategory(addForm))
+    dispatch(editCategory(editForm, id))
       .then(() => {
-        toast.success(`Success Added Category`, {
+        toast.success(`Category Edit Successfully`, {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: false,
@@ -41,7 +37,7 @@ export default function AddCategory() {
           progress: undefined,
           theme: "light",
         });
-        navigate("/tableCategory");
+        navigate(`/tableCategory`);
       })
       .catch((error) => {
         toast.error(error.message, {
@@ -56,6 +52,11 @@ export default function AddCategory() {
         });
       });
   };
+
+  useEffect(() => {
+    dispatch(fetchCategoryDetail(id));
+  }, []);
+
   return (
     <section className="vh-100" style={{ backgroundColor: "#fff" }}>
       <div className="container h-100">
@@ -70,7 +71,7 @@ export default function AddCategory() {
                     <h6 className="mb-0">Name Category</h6>
                   </div>
                   <div className="col-md-9 pe-5">
-                    <input type="text" onChange={changeHandler} name="name" placeholder="name" className="form-control form-control-lg" />
+                    <input type="text" defaultValue={data.name} onChange={changeHandler} name="name" placeholder="name" className="form-control form-control-lg" />
                   </div>
                 </div>
 
@@ -81,7 +82,7 @@ export default function AddCategory() {
                     </h6>
                   </div>
                   <div className="col-md-9 pe-5">
-                    <input name="mainImg" onChange={changeHandler} id="mainImg" type="text" className="form-control form-control-lg" placeholder="Image Url" />
+                    <input name="mainImg" defaultValue={data.mainImg} onChange={changeHandler} id="mainImg" type="text" className="form-control form-control-lg" placeholder="Image Url" />
                   </div>
                 </div>
 

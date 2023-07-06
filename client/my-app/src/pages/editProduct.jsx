@@ -15,7 +15,6 @@ export default function EditProduct() {
     return state.categoriesReducer.categories;
   });
   const dataProduct = useSelector((state) => {
-    // console.log(state.productsReducer.productDetail.product, "<<<< inio data product");
     return state.productsReducer.productDetail;
   });
   // console.log(dataProduct, "<<< ini data name");

@@ -1,4 +1,4 @@
-import { baseUrl, CATEGORIES } from "./actionType";
+import { baseUrl, CATEGORIES, CATEGORIES_DETAIL } from "./actionType";
 
 export const fetchCategorySuccess = (payload) => {
   return {
@@ -65,6 +65,7 @@ export const editCategory = (input, id) => {
       if (!response.ok) {
         throw { message: res.message };
       }
+      console.log(res);
       return "Success Edit Category";
     } catch (error) {
       throw error;
@@ -91,5 +92,29 @@ export const deleteCategory = (id) => {
     } catch (error) {
       throw error;
     }
+  };
+};
+
+const fetchCategoryDetailSuccess = (payload) => {
+  return {
+    type: CATEGORIES_DETAIL,
+    payload,
+  };
+};
+
+export const fetchCategoryDetail = (id) => {
+  return (dispatch) => {
+    fetch(baseUrl + `/category/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(fetchCategoryDetailSuccess(data.category));
+        console.log(data, "<<< ini data dari action");
+      })
+      .catch((error) => console.log(error));
   };
 };

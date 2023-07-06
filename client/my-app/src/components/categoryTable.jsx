@@ -44,7 +44,7 @@ export default function CategoryTable({ data, id }) {
           <img className="img-fluid" src={data.mainImg} />
         </td>
         <td>
-          <Link to={`/addCategory/${data.id}`}>
+          <Link to={`/editCategory/${data.id}`}>
             <button>
               <PencilFill />
             </button>

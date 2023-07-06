@@ -11,6 +11,7 @@ import TableCategory from "../pages/tableCategories";
 import AddProduct from "../pages/addProduct";
 import AddCategory from "../pages/addCategory";
 import EditProduct from "../pages/editProduct";
+import EditCategory from "../pages/editCategory";
 
 // function protectRoute() {
 //     if (localStorage.access_token) {
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
         element: <AddProduct />,
       },
       {
-        path: "/addProduct/:id",
+        path: "/editProduct/:id",
         element: <EditProduct />,
       },
       {
@@ -69,8 +70,8 @@ const router = createBrowserRouter([
         element: <AddCategory />,
       },
       {
-        path: "/addCategory/:id",
-        element: <AddCategory />,
+        path: "/editCategory/:id",
+        element: <EditCategory />,
       },
     ],
   },

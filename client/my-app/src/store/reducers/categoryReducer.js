@@ -1,18 +1,28 @@
-import {CATEGORIES} from "../actions/actionType"
+import { CATEGORIES, CATEGORIES_DETAIL } from "../actions/actionType";
 
 const initialState = {
-    categories:[],
-}
+  categories: [],
+  categoriesDetail: {},
+};
 
 export default function categoriesReducer(state = initialState, action) {
-    switch(action.type) {
-        case CATEGORIES:
-            return {
-                ...state,
-                categories: action.payload
-            };
+  const { type, payload } = action;
+  let newState = {};
+  switch (type) {
+    case CATEGORIES:
+      newState = {
+        ...state,
+        categories: payload,
+      };
+      return newState;
 
-            default:
-                return state
-    }
+    case CATEGORIES_DETAIL:
+      newState = {
+        ...state,
+        categoriesDetail: payload,
+      };
+      return newState;
+    default:
+      return state;
+  }
 }

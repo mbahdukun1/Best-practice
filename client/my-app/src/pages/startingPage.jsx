@@ -1,6 +1,7 @@
 import BarChart from "../components/barChart";
 import LineChart from "../components/lineChart";
 import PieChart from "../components/pieChart";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function StartingPage() {
   return (
@@ -20,6 +21,7 @@ export default function StartingPage() {
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
     </>
   );
 }
